@@ -67,7 +67,7 @@ class DoubanMovie:
         match_dates.sort(reverse=False)
         for date in match_dates:
             dates.append({'date': date[0], 'aera': date[1]})
-        match_season = re.search(r'<span\s*class="pl">季数:</span>\s*(\d+)<br/>', text)
+        match_season = re.search(r'<span\s*class="pl">season:</span>\s*(\d+)<br/>', text)
         season_number = None
         if match_season:
             season_number = match_season.group(1)

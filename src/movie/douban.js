@@ -1,6 +1,7 @@
 import HttpUtils from '../utils/http_utils.js';
 import dayjs from 'dayjs';
 import temmeCommon from 'temme';
+import fs from 'fs/promises';
 
 const temme = temmeCommon.default;
 
@@ -117,6 +118,21 @@ class DouBan {
         `${within_days}天之内加入${type}的影视，共${result.length}部`,
       );
     }
+    return allResults;
+  }
+
+  async getMovieDetail(url){
+    const res = await this.httpUtil.get(url,Headers);
+    const html = res.data;
+    await fs.writeFile('./tt.html', res.data);
+    if (html.includes('有异常请求从你的 IP 发出')) {
+      console.log('被豆瓣识别到抓取行为了，请更换IP后才能使用');
+      return;
+    }
+
+
+
+
   }
 }
 
